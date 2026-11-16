@@ -4,9 +4,17 @@ import { parseDate } from '../../domain/format';
 import type { Measurement } from '../../domain/types';
 
 /** Kleine Verlaufsvorschau für die Patientenkarte */
-export function Sparkline({ points, color }: { points: Measurement[]; color: string }) {
-  const W = 120;
-  const H = 40;
+export function Sparkline({
+  points,
+  color,
+  width: W = 120,
+  height: H = 40,
+}: {
+  points: Measurement[];
+  color: string;
+  width?: number;
+  height?: number;
+}) {
   if (points.length === 0) return <div style={{ width: W, height: H }} />;
   const t = points.map((p) => parseDate(p.date).getTime());
   const a = points.map((p) => p.angle);
